@@ -45,7 +45,7 @@ export const PostListPage = () => {
         </p>
         <p>정책 간단 한 줄 소개</p>
       </div>
-      <Search />
+      <Search placeholder="검색" className="w-full" />
 
       {/* 카드 */}
       <div className="my-10 space-y-5 rounded-2xl p-4 shadow-[0_0_15px_2px_rgba(0,0,0,0.05)]">
