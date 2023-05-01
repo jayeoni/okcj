@@ -64,10 +64,10 @@ export const HomePage = () => {
 
       {/* Sns Button Section */}
       <section className="absolute top-3 right-2 flex space-x-2">
-        <Link href="https://notion.so">
+        <Link href="https://closed-creature-9cf.notion.site/OKAY-8a23226992a34c7087801efd32498cf0 ">
           <Icon.Notion className="wh-7 rounded-lg bg-brand-1 stroke-white stroke-0 p-1 drop-shadow-sm" />
         </Link>
-        <Link href="https://instagram.com">
+        <Link href="https://instagram.com/ok_yp.15?igshid=ZmI3MzJjNWI=">
           <Icon.Instagram className="wh-7 rounded-lg bg-brand-1 stroke-white p-1 drop-shadow-sm" />
         </Link>
       </section>

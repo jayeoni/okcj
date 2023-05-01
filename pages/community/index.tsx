@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Button } from 'src/components/button/Button';
-import CommuListCard from 'src/components/list/CommuList';
+import CommuListCard, { Commu } from 'src/components/list/CommuList';
 
 export const CommunityPage = () => {
   const [commu, setCommu] = useState<any>();
