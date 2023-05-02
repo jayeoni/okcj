@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
 import { Button } from 'src/components/button/Button';
 import CommuListCard, { Commu } from 'src/components/list/CommuList';
@@ -21,6 +22,13 @@ export const CommunityPage = () => {
           2)진로 준비의 과정에서 느끼는 일상적인 어려움, <br />
           3)정책에 관한 자신의 아이디어를 나누는 공간입니다.
         </p>
+        <Image
+          src="/assets/characters/cjCharacters.png"
+          alt=""
+          className="absolute -right-0 bg-contain bg-center"
+          width={300}
+          height={220}
+        />
       </div>
       <div className="mb-20">
         {commu?.map((title: Commu) => (

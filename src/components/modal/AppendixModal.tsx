@@ -1,8 +1,10 @@
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 import React, { FC, useState } from 'react';
-import { TAB_DATA } from 'src/dummies';
+import { DOC_DOWNLOAD, TAB_DATA } from 'src/dummies';
 
 import { Icon } from '../common/Icon';
+import DocLinkList from '../list/DocLinkList';
 import { Tab } from '../tab/Tab';
 import { AnimationLayout } from './AnimationLayout';
 
@@ -52,7 +54,7 @@ export const AppendixModal: FC<AppendixModalProps> = ({ open, onClose }) => {
   };
   return (
     <AnimationLayout open={open} onClose={onClose}>
-      <div className="relative w-full transform flex-col items-center text-left shadow-xl transition-all">
+      <div className="w-full  transform flex-col items-center text-left shadow-xl transition-all">
         <section className="flex flex-col items-center rounded-t-lg bg-brand-1 px-5 pt-5 text-center text-white">
           <Icon.X className="absolute right-3 top-3" onClick={onClose} />
           <Icon.Bookmark className="wh-10 flex items-center stroke-white" />
@@ -72,7 +74,7 @@ export const AppendixModal: FC<AppendixModalProps> = ({ open, onClose }) => {
           </Tab>
         </section>
         <motion.section
-          className="flex h-72 w-full items-center rounded-b-lg bg-white p-5 text-center"
+          className="h-full w-full flex-col rounded-b-lg bg-white p-5 text-center"
           key={page}
           custom={direction}
           variants={variants}
@@ -96,7 +98,23 @@ export const AppendixModal: FC<AppendixModalProps> = ({ open, onClose }) => {
             }
           }}
         >
-          {TAB_DATA[page].body}
+          <>
+            <div className="mb-2 font-bold">{TAB_DATA[page].boldBody}</div>
+            {TAB_DATA[page].body}
+            <div className={`relative mt-2 h-${TAB_DATA[page].imgSize}`}>
+              <Image
+                priority={false}
+                src={`/assets/characters/${TAB_DATA[page].imgPath}`}
+                alt="표"
+                layout="fill"
+                objectFit="contain"
+              />
+            </div>
+            {page === 2 &&
+              DOC_DOWNLOAD.map((doc) => (
+                <DocLinkList key={doc.id} items={doc} />
+              ))}
+          </>
         </motion.section>
       </div>
     </AnimationLayout>
