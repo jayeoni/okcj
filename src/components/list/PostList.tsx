@@ -28,14 +28,14 @@ export const PostList = (props: PostListProps) => {
       <div className="space-x-1.5">
         <Label text={`D-${diffDays}`} className="bg-brand-2" />
         <Link
-          href={items?.post_url[0].url || ''}
+          href={items?.post_url[0]?.url || ''}
           className="overflow-hidden text-clip"
         >
           {items.title}
         </Link>
       </div>
     );
-  else return <p>곧 마감되는 정책이 없습니다.</p>;
+  else return <></>;
 };
 
 export default PostList;

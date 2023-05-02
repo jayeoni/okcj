@@ -73,14 +73,14 @@ export const HomePage = () => {
       </section>
 
       <Image
-        src="/assets/characters/Tree.png"
+        src="/assets/characters/char1.png"
         alt=""
-        className="absolute top-20 -right-0 bg-contain bg-center"
-        width={149}
-        height={182}
+        className="absolute top-8 -right-10 rotate-12 bg-contain bg-center"
+        width={260}
+        height={220}
       />
 
-      <div className="mt-48 space-y-10 text-brand-1">
+      <div className="mt-40 space-y-10 text-brand-1">
         <div className="space-y-4">
           <div className="flex items-center space-x-2">
             <h3>곧 마감되는 정책</h3>
@@ -91,6 +91,13 @@ export const HomePage = () => {
               {post?.map((list: Post) => (
                 <PostList key={list.id} items={list} />
               ))}
+              {post?.filter((list: Post) => {
+                const today = new Date();
+                const dday = new Date(list.dday);
+                const diffTime = Math.abs(dday.getTime() - today.getTime());
+                const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+                return diffDays < 7;
+              }).length === 0 && <p>곧 마감되는 정책이 없습니다.</p>}
             </section>
             <Button
               text="청년 정책 보러 가기"
