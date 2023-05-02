@@ -32,6 +32,7 @@ import Minus from 'public/assets/icons/icon-minus.svg';
 import MoreHorizontal from 'public/assets/icons/icon-more-horizontal.svg';
 import MoreVertical from 'public/assets/icons/icon-more-vertical.svg';
 import Notion from 'public/assets/icons/icon-notion.svg';
+import Paste from 'public/assets/icons/icon-paste.svg';
 import Phone from 'public/assets/icons/icon-phone.svg';
 import Plus from 'public/assets/icons/icon-plus.svg';
 import RefreshCCW from 'public/assets/icons/icon-refresh-ccw.svg';
@@ -82,6 +83,7 @@ export const Icon = {
   MoreHorizontal,
   MoreVertical,
   Notion,
+  Paste,
   Phone,
   Plus,
   RefreshCCW,
