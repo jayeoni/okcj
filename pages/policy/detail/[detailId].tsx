@@ -46,25 +46,25 @@ export const PolicyDetailPage = () => {
               <div className="wh-5 min-w-5 items-center rounded-md bg-brand-2 text-center text-sm font-semibold text-white">
                 1
               </div>
-              <p>{post?.post_condition[0].text}</p>
+              <p>{post?.post_condition?.[0].text}</p>
             </section>
             <section className="flex space-x-2 rounded-2xl">
               <div className="wh-5 min-w-5 items-center rounded-md bg-brand-2 text-center text-sm font-semibold text-white">
                 2
               </div>
-              <p>{post?.post_condition[1].text}</p>
+              <p>{post?.post_condition?.[1].text}</p>
             </section>
             <section className="flex space-x-2 rounded-2xl">
               <div className="wh-5 min-w-5 items-center rounded-md bg-brand-2 text-center text-sm font-semibold text-white">
                 3
               </div>
-              <p>{post?.post_condition[2].text}</p>
+              <p>{post?.post_condition?.[2].text}</p>
             </section>
           </div>
         </div>
 
         {/* 신청 과정 */}
-        <div className=" mt-16 grid grid-cols-1 gap-4">
+        <div className="mt-16 grid grid-cols-1 gap-4">
           <div className="flex items-center space-x-2">
             <h3 className="text-brand-1">신청 과정</h3>
             <div className="rounded-2xl bg-brand-1 px-2.5 text-white">4</div>
@@ -101,10 +101,13 @@ export const PolicyDetailPage = () => {
             <h3 className="text-brand-1">구비 서류</h3>
             <div className="rounded-2xl bg-brand-1 px-2.5 text-white">3</div>
           </div>
-          <div className="flex justify-center space-x-5">
+          <div className="flex-col justify-center space-y-2 rounded-2xl p-4 shadow-[0_3px_15px_3px_rgba(0,0,0,0.05)]">
             {DOCUMENT_DUMMY.map((doc) => (
               <DocumentCard key={doc.id} items={doc} />
             ))}
+            <p className="text-sm text-slate-500">
+              서류 이름을 누르면 해당 서류 발급 사이트로 연결돼!
+            </p>
           </div>
         </div>
 
@@ -112,7 +115,7 @@ export const PolicyDetailPage = () => {
           <Button
             text="신청하러 바로 가기"
             className="w-full"
-            to="https://yeyak.seoul.go.kr/web/search/selectPageListDetailSearchImg.do?code=T500&dCode=T514"
+            to={post?.post_url}
           />
         </div>
       </div>
