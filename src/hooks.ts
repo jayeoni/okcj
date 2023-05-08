@@ -4,12 +4,23 @@ import { stringify } from 'qs';
 import { MutableRefObject, useEffect, useRef, useState } from 'react';
 
 import { api } from './plugins/axios';
-import { tokenState } from './plugins/ridge';
+import { tokenState, userState } from './plugins/ridge';
 export const DEBOUNCE_THRESHOLD_MS = 250;
+
+export interface UserType {
+  id: number;
+  username: string;
+  password: string;
+  gender_category: string;
+  nickname: string;
+}
 
 export const useAuth = () => {
   const [token, setToken] = tokenState.use();
+  const [user, setUser] = userState.use();
+
   const authenticated = token !== null;
+
   const signup = (data: any) =>
     api
       .post('/auth/signup', data)
@@ -19,7 +30,7 @@ export const useAuth = () => {
       .post('/auth/login', data)
       .then(({ data: { token } }) => setToken(token));
   const logout = () => tokenState.reset();
-  return { token, authenticated, signup, login, logout };
+  return { token, authenticated, user, setUser, signup, login, logout };
 };
 
 export function useQueryString(queryObject: any = {}) {
