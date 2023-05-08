@@ -1,11 +1,11 @@
 export enum HeadType {
-  CONTENTS = 'CONTENTS',
-  DAILY = 'DAILY',
-  IDEA = 'IDEA',
+  CHAT = 'chat',
+  FEELING = 'feeling',
+  IDEA = 'idea',
 }
 
 export const HEAD_TYPE_KOREAN = {
-  [HeadType.CONTENTS]: '정책콘텐츠',
-  [HeadType.DAILY]: '일상',
+  [HeadType.CHAT]: '채팅',
+  [HeadType.FEELING]: '느낌',
   [HeadType.IDEA]: '아이디어',
 };

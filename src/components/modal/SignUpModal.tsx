@@ -1,6 +1,7 @@
+import axios from 'axios';
 import React, { FC } from 'react';
 import { useForm } from 'react-hook-form';
-import { useAuth } from 'src/hooks';
+import { tokenState } from 'src/plugins/ridge';
 
 import { Button } from '../button/Button';
 import { Icon } from '../common/Icon';
@@ -13,14 +14,15 @@ interface SignUpModalProps {
 }
 
 interface FormValues {
-  email: string;
+  username: string;
   password: string;
-  name: string;
+  nickname: string;
+  gender_category: string;
 }
 
 export const SignUpModal: FC<SignUpModalProps> = ({ open, onClose }) => {
   //const [isCodeSent, setIsCodeSent] = useState(false);
-  const { signup } = useAuth();
+  //const { signup } = useAuth();
   const {
     register,
     handleSubmit,
@@ -38,20 +40,42 @@ export const SignUpModal: FC<SignUpModalProps> = ({ open, onClose }) => {
         </section>
         <form
           className="flex flex-col space-y-14 p-4 text-brand-1"
-          onSubmit={handleSubmit((data) => signup(data))}
+          onSubmit={handleSubmit((data) =>
+            axios
+              .post(
+                `https://jain5379.pythonanywhere.com/accounts/signup/`,
+                data
+              )
+              .then((response) => {
+                axios
+                  .post(
+                    `https://jain5379.pythonanywhere.com/accounts/login/`,
+                    data
+                  )
+                  .then((response) => {
+                    tokenState.set(response.data.token.access_token);
+
+                    const { token } = response.data;
+                    if (!token) {
+                      throw new Error('Invalid response from server');
+                    }
+
+                    onClose();
+                  });
+              })
+              .catch((error) => {
+                console.error(error);
+                // display error message to the user
+              })
+          )}
         >
           <section className="flex flex-col space-y-6">
             <ModalTextField
-              label="아이디"
-              helper={errors.name?.message}
-              {...register('name', { required: '이름을 입력해주세요' })}
-            />
-            <ModalTextField
-              type="email"
-              label="이메일"
-              placeholder="jayeon@example.com"
-              helper={errors.email?.message}
-              {...register('email', { required: '이메일을 입력해주세요' })}
+              type="username"
+              label="이름"
+              placeholder="이름을 입력해주세요"
+              helper={errors.username?.message}
+              {...register('username', { required: '이름을 입력해주세요' })}
             />
 
             <ModalTextField
@@ -63,19 +87,27 @@ export const SignUpModal: FC<SignUpModalProps> = ({ open, onClose }) => {
                 minLength: { value: 6, message: '최소 6자 이상 가능합니다' },
                 maxLength: {
                   value: 15,
-                  message: '최대 15자 까지만 가능합니다',
+                  message: '최대 15자까지만 가능합니다',
                 },
               })}
             />
 
             <ModalTextField
               label="닉네임"
-              helper={errors.name?.message}
-              {...register('name', { required: '이름을 입력해주세요' })}
+              helper={errors.nickname?.message}
+              {...register('nickname', { required: '닉네임을 입력해주세요' })}
+            />
+
+            <ModalTextField
+              label="성별"
+              helper={errors.gender_category?.message}
+              {...register('gender_category', {
+                required: '성별을 입력해주세요(W/M)',
+              })}
             />
           </section>
 
-          <Button text="가입하기" className="filled-brand-1" />
+          <Button text="가입하기" className="filled-brand-1" type="submit" />
         </form>
       </div>
     </AnimationLayout>

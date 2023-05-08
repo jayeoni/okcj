@@ -10,7 +10,7 @@ const SearchField = (props: SearchProps) => {
   const { className, value, ...rest } = props;
   const [isFocused, setIsFocused] = useState(false);
   return (
-    <div className="mt-32">
+    <div className="mt-16">
       <div
         className={twMerge(
           'relative flex w-full items-center overflow-hidden border-b-2 border-brand-1 opacity-100 transition-all hover:stroke-2',

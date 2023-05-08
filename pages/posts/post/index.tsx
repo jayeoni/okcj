@@ -13,23 +13,26 @@ export const PostListPage = () => {
       .then((res) => res.json())
       .then((post) => setPost(post))
       .catch((error) => console.error);
-  }, [post]);
+  }, []);
 
   return (
     <div className="p-5">
-      <div className="mt-10 mb-36 space-y-2.5">
+      <div className="mt-10 mb-12 space-y-2.5">
         <Image
-          src="/assets/characters/Tree.png"
+          src="/assets/characters/2chars.png"
           alt=""
-          className="absolute top-12 -right-0 bg-contain bg-center"
-          width={149}
+          className="absolute top-0 -right-0 bg-contain bg-center"
+          width={250}
           height={182}
         />
         <p className="text-3xl text-brand-1">
           <span className="font-bold">청</span>년{' '}
           <span className="font-bold">정</span>책
         </p>
-        <p>정책 간단 한 줄 소개</p>
+        <p>
+          누구보다 쉽게 <br /> 나에게 필요한 청년 정책만 쏙쏙! <br /> 실제
+          신청자의 생생한 후기까지!
+        </p>
       </div>
       <Search placeholder="검색" className="w-full" />
 

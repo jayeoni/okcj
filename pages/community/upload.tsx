@@ -1,26 +1,22 @@
-import axios from 'axios';
 import router from 'next/router';
 import React, { useState } from 'react';
+import Authorization from 'src/components/authorization/Authorization';
 import { Avatar } from 'src/components/avatar/Avatar';
 import { Button } from 'src/components/button/Button';
-import { Icon } from 'src/components/common/Icon';
 import TextArea from 'src/components/input/TextArea';
 import TextField from 'src/components/input/TextField';
-import AppendixModal from 'src/components/modal/AppendixModal';
-import LoginModal from 'src/components/modal/LoginModal';
-import SignUpModal from 'src/components/modal/SignUpModal';
 import SelectHeadType from 'src/components/select/SelectHead';
 import { HeadType } from 'src/constants/head';
+// import { useAuth } from 'src/hooks';
+import { api } from 'src/plugins/axios';
 
 export const CommuUploadPage = () => {
   const [title, setTitle] = useState<string>();
   const [content, setContent] = useState<string>();
   const [selectValue, setSelectValue] = useState<HeadType | null>();
 
-  const [signupOpen, setSignupOpen] = useState<boolean>(false);
-  const [loginOpen, setLoginOpen] = useState<boolean>(false);
-  const [appendixOpen, setAppendixOpen] = useState<boolean>(false);
-  const [moreOpen, setMoreOpen] = useState<boolean>(false);
+  // const { user } = useAuth();
+  // console.log('user: ', user);
 
   const sendPostData = async () => {
     try {
@@ -29,18 +25,8 @@ export const CommuUploadPage = () => {
         title: title,
         content: content,
       };
-      const response = await fetch(
-        'https://jain5379.pythonanywhere.com/community/post/',
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(postData),
-        }
-      );
-      const data = await response.json();
-      console.log('Server response:', data);
+      const response = await api.post('/community/post/', postData);
+      console.log('Server response: ', response.data);
       router.push('/community');
     } catch (error) {
       console.error(error);
@@ -49,13 +35,6 @@ export const CommuUploadPage = () => {
 
   return (
     <div className="p-5">
-      <SignUpModal open={signupOpen} onClose={() => setSignupOpen(false)} />
-      <LoginModal open={loginOpen} onClose={() => setLoginOpen(false)} />
-      <AppendixModal
-        open={appendixOpen}
-        onClose={() => setAppendixOpen(false)}
-      />
-
       <div className="relative my-7 inline-block w-full">
         <SelectHeadType
           placeholder="말머리 선택"
@@ -78,7 +57,8 @@ export const CommuUploadPage = () => {
       </div>
 
       <div className="mt-2.5 mb-10 flex items-center space-x-1.5 text-slate-500">
-        <Avatar className="wh-7" /> <p className="text-sm">과제하는 프로도</p>
+        <Avatar className="wh-7" />
+        {/* <p className="text-sm">{user?.nickname}</p> */}
       </div>
 
       <TextArea
@@ -97,57 +77,13 @@ export const CommuUploadPage = () => {
         <Button
           text="등록하기"
           className="w-full"
-          to="/community"
           onClick={() => {
             sendPostData();
-            axios.post(
-              `https://jain5379.pythonanywhere.com/community/post/`,
-              {
-                community_category: selectValue,
-                title: title,
-                content: content,
-              },
-              {
-                headers: {
-                  Authorization:
-                    'Bearer ' + localStorage.getItem('access_token'),
-                },
-              }
-            );
           }}
         />
       </div>
 
-      <section className="fixed bottom-24 right-5 z-20 flex-col space-y-1 text-white">
-        {moreOpen === true && (
-          <>
-            <button
-              className="wh-14 flex items-center justify-center rounded-full bg-[#6EE7B7] bg-opacity-90 shadow-md "
-              onClick={() => setLoginOpen(true)}
-            >
-              로그인
-            </button>
-            <button
-              className="wh-14 flex items-center justify-center rounded-full bg-[#6EE7B7] bg-opacity-90 shadow-md"
-              onClick={() => setSignupOpen(true)}
-            >
-              회원 <br /> 가입
-            </button>
-            <button
-              className="wh-14 flex items-center justify-center rounded-full bg-[#6EE7B7] bg-opacity-90 shadow-md"
-              onClick={() => setAppendixOpen(true)}
-            >
-              용어 <br /> 부록
-            </button>
-          </>
-        )}
-        <button
-          className="wh-14 flex items-center justify-center rounded-full bg-[#6EE7B7] bg-opacity-90 shadow-md "
-          onClick={() => setMoreOpen(!moreOpen)}
-        >
-          <Icon.MoreVertical className="stroke-white" />
-        </button>
-      </section>
+      <Authorization />
     </div>
   );
 };
