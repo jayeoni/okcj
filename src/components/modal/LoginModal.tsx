@@ -1,6 +1,8 @@
 import axios from 'axios';
 import React, { FC } from 'react';
 import { useForm } from 'react-hook-form';
+import { useAuth } from 'src/hooks';
+import { tokenState } from 'src/plugins/ridge';
 
 import { Button } from '../button/Button';
 import { Icon } from '../common/Icon';
@@ -19,6 +21,7 @@ interface FormValues {
 
 export const LoginModal: FC<LoginModalProps> = ({ open, onClose }) => {
   //const [isCodeSent, setIsCodeSent] = useState(false);
+  const { setUser } = useAuth();
 
   const {
     register,
@@ -41,10 +44,9 @@ export const LoginModal: FC<LoginModalProps> = ({ open, onClose }) => {
             axios
               .post(`https://jain5379.pythonanywhere.com/accounts/login/`, data)
               .then((response) => {
-                localStorage.setItem(
-                  'access_token',
-                  response.data.token.access_token
-                );
+                setUser(response.data.token);
+                console.log(response.data.token);
+                tokenState.set(response.data.token.access_token);
                 onClose();
               })
           )}
