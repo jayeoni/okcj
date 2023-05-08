@@ -1,20 +1,12 @@
 import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
+import Authorization from 'src/components/authorization/Authorization';
 import PostListCard, { Intro } from 'src/components/card/PostListCard';
-import { Icon } from 'src/components/common/Icon';
 import Search from 'src/components/input/Search';
 import { Label } from 'src/components/label/Label';
-import AppendixModal from 'src/components/modal/AppendixModal';
-import LoginModal from 'src/components/modal/LoginModal';
-import SignUpModal from 'src/components/modal/SignUpModal';
 
 export const PostListPage = () => {
   const [post, setPost] = useState<any>();
-
-  const [moreOpen, setMoreOpen] = useState<boolean>(false);
-  const [signupOpen, setSignupOpen] = useState<boolean>(false);
-  const [loginOpen, setLoginOpen] = useState<boolean>(false);
-  const [appendixOpen, setAppendixOpen] = useState<boolean>(false);
 
   useEffect(() => {
     fetch('https://jain5379.pythonanywhere.com/posts/post/')
@@ -25,12 +17,6 @@ export const PostListPage = () => {
 
   return (
     <div className="p-5">
-      <SignUpModal open={signupOpen} onClose={() => setSignupOpen(false)} />
-      <LoginModal open={loginOpen} onClose={() => setLoginOpen(false)} />
-      <AppendixModal
-        open={appendixOpen}
-        onClose={() => setAppendixOpen(false)}
-      />
       <div className="mt-10 mb-36 space-y-2.5">
         <Image
           src="/assets/characters/Tree.png"
@@ -74,36 +60,7 @@ export const PostListPage = () => {
         <PostListCard key={list.id} items={list} />
       ))}
 
-      <section className="fixed bottom-24 right-5 z-20 flex-col space-y-1 text-white">
-        {moreOpen === true && (
-          <>
-            <button
-              className="wh-14 flex items-center justify-center rounded-full bg-[#6EE7B7] bg-opacity-90 shadow-md "
-              onClick={() => setLoginOpen(true)}
-            >
-              로그인
-            </button>
-            <button
-              className="wh-14 flex items-center justify-center rounded-full bg-[#6EE7B7] bg-opacity-90 shadow-md"
-              onClick={() => setSignupOpen(true)}
-            >
-              회원 <br /> 가입
-            </button>
-            <button
-              className="wh-14 flex items-center justify-center rounded-full bg-[#6EE7B7] bg-opacity-90 shadow-md"
-              onClick={() => setAppendixOpen(true)}
-            >
-              용어 <br /> 부록
-            </button>
-          </>
-        )}
-        <button
-          className="wh-14 flex items-center justify-center rounded-full bg-[#6EE7B7] bg-opacity-90 shadow-md "
-          onClick={() => setMoreOpen(!moreOpen)}
-        >
-          <Icon.MoreVertical className="stroke-white" />
-        </button>
-      </section>
+      <Authorization />
     </div>
   );
 };

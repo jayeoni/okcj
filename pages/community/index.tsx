@@ -5,12 +5,13 @@ import CommuListCard, { Commu } from 'src/components/list/CommuList';
 
 export const CommunityPage = () => {
   const [commu, setCommu] = useState<any>();
+
   useEffect(() => {
     fetch(`https://jain5379.pythonanywhere.com/community/post/`)
       .then((res) => res.json())
       .then((commu) => setCommu(commu))
       .catch((error) => console.error);
-  }, [commu]);
+  }, []);
 
   return (
     <div className="px-5">

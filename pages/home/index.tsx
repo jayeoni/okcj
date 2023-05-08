@@ -5,15 +5,13 @@ import Image from 'next/image';
 import Link from 'next/link';
 import router from 'next/router';
 import React, { useEffect, useState } from 'react';
+import Authorization from 'src/components/authorization/Authorization';
 import { Button } from 'src/components/button/Button';
 import ContentsCard, { Policy } from 'src/components/card/ContentsCard';
 import { Icon } from 'src/components/common/Icon';
 import { Label } from 'src/components/label/Label';
 import PostList, { Post } from 'src/components/list/PostList';
 import PostscriptCard, { Postscript } from 'src/components/list/PostscriptList';
-import AppendixModal from 'src/components/modal/AppendixModal';
-import { LoginModal } from 'src/components/modal/LoginModal';
-import SignUpModal from 'src/components/modal/SignUpModal';
 import { FreeMode } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
@@ -22,41 +20,31 @@ export const HomePage = () => {
   const [policy, setPolicy] = useState<any>();
   const [postscript, setPostscript] = useState<any>();
 
-  const [signupOpen, setSignupOpen] = useState<boolean>(false);
-  const [loginOpen, setLoginOpen] = useState<boolean>(false);
-  const [appendixOpen, setAppendixOpen] = useState<boolean>(false);
-  const [moreOpen, setMoreOpen] = useState<boolean>(false);
-
   useEffect(() => {
     fetch('https://jain5379.pythonanywhere.com/posts/post/')
       .then((res) => res.json())
       .then((post) => setPost(post))
       .catch((error) => console.error);
-  }, [post]);
+  }, []);
 
   useEffect(() => {
     fetch('https://jain5379.pythonanywhere.com/policys/post/')
       .then((res) => res.json())
       .then((policy) => setPolicy(policy))
       .catch((error) => console.error);
-  }, [policy]);
+  }, []);
 
   useEffect(() => {
     fetch('https://jain5379.pythonanywhere.com/postscript/post/')
       .then((res) => res.json())
       .then((postscript) => setPostscript(postscript))
       .catch((error) => console.error);
-  }, [postscript]);
+  }, []);
+
+  //console.log('isAuthorized: ', isAuthorized);
 
   return (
     <div className="px-5 pt-5 pb-24">
-      <SignUpModal open={signupOpen} onClose={() => setSignupOpen(false)} />
-      <LoginModal open={loginOpen} onClose={() => setLoginOpen(false)} />
-      <AppendixModal
-        open={appendixOpen}
-        onClose={() => setAppendixOpen(false)}
-      />
-
       <h2 className="text-brand-1">
         오늘의 날씨는 맑음, <br />
         오늘 정책 한 잔 어때?
@@ -75,7 +63,7 @@ export const HomePage = () => {
       <Image
         src="/assets/characters/char1.png"
         alt=""
-        className="absolute top-8 -right-10 rotate-12 bg-contain bg-center"
+        className="fixed top-8 -right-10 rotate-12 bg-contain bg-center"
         width={260}
         height={220}
       />
@@ -176,40 +164,10 @@ export const HomePage = () => {
           </div>
         </div>
       </div>
+      <Authorization />
       <div className="fixed bottom-8 z-10 w-full pr-10">
         <Button text="커뮤니티 바로 가기" className="w-full" to="/community" />
       </div>
-
-      <section className="fixed bottom-24 right-5 z-20 flex-col space-y-1 text-white">
-        {moreOpen === true && (
-          <>
-            <button
-              className="wh-14 flex items-center justify-center rounded-full bg-[#6EE7B7] bg-opacity-90 shadow-md "
-              onClick={() => setLoginOpen(true)}
-            >
-              로그인
-            </button>
-            <button
-              className="wh-14 flex items-center justify-center rounded-full bg-[#6EE7B7] bg-opacity-90 shadow-md"
-              onClick={() => setSignupOpen(true)}
-            >
-              회원 <br /> 가입
-            </button>
-            <button
-              className="wh-14 flex items-center justify-center rounded-full bg-[#6EE7B7] bg-opacity-90 shadow-md"
-              onClick={() => setAppendixOpen(true)}
-            >
-              용어 <br /> 부록
-            </button>
-          </>
-        )}
-        <button
-          className="wh-14 flex items-center justify-center rounded-full bg-[#6EE7B7] bg-opacity-90 shadow-md "
-          onClick={() => setMoreOpen(!moreOpen)}
-        >
-          <Icon.MoreVertical className="stroke-white" />
-        </button>
-      </section>
     </div>
   );
 };

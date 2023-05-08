@@ -1,22 +1,15 @@
 // import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
+import Authorization from 'src/components/authorization/Authorization';
 import { Avatar } from 'src/components/avatar/Avatar';
 import { Chat, ChatBox } from 'src/components/card/ChatBox';
 import { Icon } from 'src/components/common/Icon';
 import TextField from 'src/components/input/TextField';
-import AppendixModal from 'src/components/modal/AppendixModal';
-import LoginModal from 'src/components/modal/LoginModal';
-import SignUpModal from 'src/components/modal/SignUpModal';
 
 export const ReviewPage = () => {
   // const router = useRouter();
   const [data, setData] = useState<any>();
   const [post, setPost] = useState<any>();
-
-  const [signupOpen, setSignupOpen] = useState<boolean>(false);
-  const [loginOpen, setLoginOpen] = useState<boolean>(false);
-  const [appendixOpen, setAppendixOpen] = useState<boolean>(false);
-  const [moreOpen, setMoreOpen] = useState<boolean>(false);
 
   // const reviewId = router.query.reviewId;
 
@@ -40,12 +33,6 @@ export const ReviewPage = () => {
   if (!data) return <></>;
   return (
     <div className="h-screen bg-brand-1">
-      <SignUpModal open={signupOpen} onClose={() => setSignupOpen(false)} />
-      <LoginModal open={loginOpen} onClose={() => setLoginOpen(false)} />
-      <AppendixModal
-        open={appendixOpen}
-        onClose={() => setAppendixOpen(false)}
-      />
       <div className="space-y-1 py-11 pl-4 pr-10 text-white">
         <h2>{post?.title}</h2>
         <p className="text-sm">{post?.intro}</p>
@@ -100,36 +87,7 @@ export const ReviewPage = () => {
         </button>
       </div>
 
-      <section className="fixed bottom-24 right-5 z-20 flex-col space-y-1 text-white">
-        {moreOpen === true && (
-          <>
-            <button
-              className="wh-14 flex items-center justify-center rounded-full bg-[#6EE7B7] bg-opacity-90 shadow-md "
-              onClick={() => setLoginOpen(true)}
-            >
-              로그인
-            </button>
-            <button
-              className="wh-14 flex items-center justify-center rounded-full bg-[#6EE7B7] bg-opacity-90 shadow-md"
-              onClick={() => setSignupOpen(true)}
-            >
-              회원 <br /> 가입
-            </button>
-            <button
-              className="wh-14 flex items-center justify-center rounded-full bg-[#6EE7B7] bg-opacity-90 shadow-md"
-              onClick={() => setAppendixOpen(true)}
-            >
-              용어 <br /> 부록
-            </button>
-          </>
-        )}
-        <button
-          className="wh-12 flex items-center justify-center rounded-full bg-[#6EE7B7] bg-opacity-90 shadow-md "
-          onClick={() => setMoreOpen(!moreOpen)}
-        >
-          <Icon.MoreVertical className="stroke-white" />
-        </button>
-      </section>
+      <Authorization />
     </div>
   );
 };
