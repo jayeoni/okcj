@@ -23,11 +23,11 @@ export const useAuth = () => {
 
   const signup = (data: any) =>
     api
-      .post('/auth/signup', data)
+      .post('/accounts/signup', data)
       .then(({ data: { token } }) => setToken(token));
   const login = (data: any) =>
     api
-      .post('/auth/login', data)
+      .post('/accounts/login', data)
       .then(({ data: { token } }) => setToken(token));
   const logout = () => tokenState.reset();
   return { token, authenticated, user, setUser, signup, login, logout };

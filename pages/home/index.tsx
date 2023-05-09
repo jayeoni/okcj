@@ -44,7 +44,7 @@ export const HomePage = () => {
   //console.log('isAuthorized: ', isAuthorized);
 
   return (
-    <div className="px-5 pt-5 pb-24">
+    <div className="relative overflow-hidden px-5 pt-5 pb-24">
       <h2 className="text-brand-1">
         오늘의 날씨는 맑음, <br />
         오늘 정책 한 잔 어때?
@@ -63,7 +63,7 @@ export const HomePage = () => {
       <Image
         src="/assets/characters/char1.png"
         alt=""
-        className="fixed top-8 -right-10 rotate-12 bg-contain bg-center"
+        className="absolute top-8 -right-10 rotate-12 bg-contain bg-center"
         width={260}
         height={220}
       />
@@ -90,7 +90,7 @@ export const HomePage = () => {
             <Button
               text="청년 정책 보러 가기"
               className="h-20 p-3 text-sm font-extrabold"
-              to="/posts"
+              to="/posts/post"
             />
           </div>
         </div>
