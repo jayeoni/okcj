@@ -28,7 +28,8 @@ export const PostList = (props: PostListProps) => {
       <div className="space-x-1.5">
         <Label text={`D-${diffDays}`} className="bg-brand-2" />
         <Link
-          href={items?.post_url[0]?.url || ''}
+          // href={items?.post_url[0]?.url || ''}
+          href={`/policy/${items.id}`}
           className="overflow-hidden text-clip"
         >
           {items.title}

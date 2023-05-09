@@ -19,24 +19,15 @@ export const PolicyDetailPage = () => {
   }, [detailId]);
 
   return (
-    <div className="mb-20 p-5">
-      {/* tree img */}
-      <Image
-        src="/assets/characters/Tree.png"
-        alt=""
-        className="absolute top-9 -right-0 bg-contain bg-center"
-        width={106}
-        height={130}
-      />
-
-      <div className="space-y-1 py-11 pr-9">
+    <div className="mb-20">
+      <div className="mx-5 space-y-1 py-11 pr-9">
         <h2 className="pr-11 text-brand-1">{post?.title}</h2>
         <p className="pr-16 text-sm text-slate-900">{post?.intro}</p>
       </div>
 
       <div className="space-y-14">
         {/* 신청 요건 */}
-        <div className="mt-9 space-y-4">
+        <div className="mx-5 mt-9 space-y-4">
           <div className="flex items-center space-x-2">
             <h3 className="text-brand-1">신청 요건</h3>
             <div className="rounded-2xl bg-brand-1 px-2.5 text-white">3</div>
@@ -72,17 +63,16 @@ export const PolicyDetailPage = () => {
         {/* 신청 과정 */}
         {post?.represent_image && (
           <div className="mt-16 grid grid-cols-1 gap-4">
-            <div className="flex items-center space-x-2">
+            {/* <div className="flex items-center space-x-2">
               <h3 className="text-brand-1">신청 과정</h3>
               <div className="rounded-2xl bg-brand-1 px-2.5 text-white">
                 {post?.step}
               </div>
-            </div>
+            </div> */}
 
-            {/*여기 문제 있음.. */}
             <div className="relative h-[400px]">
               <Image
-                className="rounded-lg object-contain"
+                className="h-max w-full rounded-lg object-contain"
                 src={post?.represent_image || ''}
                 alt=""
                 layout="fill"
@@ -106,7 +96,7 @@ export const PolicyDetailPage = () => {
         </div> */}
 
         {/* 구비 서류 */}
-        <div className="mt-16 space-y-4">
+        <div className="mx-5 space-y-4 pb-12">
           <div className="flex items-center space-x-2">
             <h3 className="text-brand-1">구비 서류</h3>
             <div className="rounded-2xl bg-brand-1 px-2.5 text-white">3</div>
@@ -121,7 +111,7 @@ export const PolicyDetailPage = () => {
           </div>
         </div>
 
-        <div className="fixed bottom-8 z-10 w-full pr-10">
+        <div className="fixed bottom-8 z-10 ml-5 w-full pr-10">
           <Button
             text="신청하러 바로 가기"
             className="w-full"
