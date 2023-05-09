@@ -29,7 +29,7 @@ export const Authorization = () => {
                 className="wh-14 flex items-center justify-center rounded-full bg-[#6EE7B7] bg-opacity-90 shadow-md "
                 onClick={() => logout()}
               >
-                로그아웃
+                로그 <br /> 아웃
               </button>
             ) : (
               <>

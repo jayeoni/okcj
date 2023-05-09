@@ -31,7 +31,7 @@ export const CommunityPage = () => {
           height={220}
         />
       </div>
-      <div className="mb-20">
+      <div className="mb-20 pt-44">
         {commu?.map((title: Commu) => (
           <CommuListCard key={title.id} items={title} />
         ))}

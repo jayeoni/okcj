@@ -24,13 +24,15 @@ export const ContentPageCard = (props: ContentPageCardProps) => {
       className="relative aspect-square h-full w-full"
       onClick={() => push(`/posts/post/${items.id}`)}
     >
-      <Image
-        src={items?.represent_image || ''}
-        alt=""
-        layout="fill"
-        objectFit="cover"
-        className="rounded-xl "
-      />
+      {items.represent_image && (
+        <Image
+          src={items?.represent_image || ''}
+          alt=""
+          layout="fill"
+          objectFit="cover"
+          className="rounded-xl "
+        />
+      )}
     </div>
   );
 };

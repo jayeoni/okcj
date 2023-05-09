@@ -24,7 +24,7 @@ export default function HomePage() {
         width={700}
         height={460}
       />
-      {authenticated ? (
+      {/* {authenticated ? (
         <>
           <Button text="MyPage" className="filled-brand-1" to="/mypage" />
           <Button text="Logout" className="outlined-red-500" onClick={logout} />
@@ -35,7 +35,12 @@ export default function HomePage() {
           className="flex items-center justify-center bg-white p-5 font-extrabold text-brand-1 drop-shadow "
           to="/home"
         />
-      )}
+      )} */}
+      <Button
+        text="시작하기"
+        className="flex items-center justify-center bg-white p-5 font-extrabold text-brand-1 drop-shadow "
+        to="/home"
+      />
     </div>
   );
 }

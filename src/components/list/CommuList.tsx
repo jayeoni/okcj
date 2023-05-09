@@ -15,7 +15,7 @@ export const CommuList = (props: CommuListProps) => {
   const { items } = props;
   return (
     <Link
-      className="flex space-x-1 border-t py-7"
+      className="flex space-x-1 border-t py-6"
       href={`/community/post/${items.id}`}
     >
       <p className="text-sm text-slate-500">

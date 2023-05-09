@@ -75,7 +75,7 @@ export const HomePage = () => {
             <Label text="HOT" className="bg-brand-1" />
           </div>
           <div className="grid grid-cols-4 items-center">
-            <section className="hide-scrollbar col-span-3 grid items-center overflow-y-scroll p-1">
+            <section className="hide-scrollbar col-span-3 grid items-center space-y-0.5 overflow-y-scroll p-1">
               {post?.map((list: Post) => (
                 <PostList key={list.id} items={list} />
               ))}

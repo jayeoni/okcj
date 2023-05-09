@@ -20,7 +20,7 @@ export const ListPage = () => {
       .then((res) => res.json())
       .then((post) => setPost(post))
       .catch((error) => console.error);
-  }, [post]);
+  }, []);
 
   return (
     <div className="p-5">

@@ -42,44 +42,54 @@ export const PolicyDetailPage = () => {
             <div className="rounded-2xl bg-brand-1 px-2.5 text-white">3</div>
           </div>
           <div className="flex-col space-y-2 rounded-2xl p-4 shadow-[0_3px_15px_3px_rgba(0,0,0,0.05)]">
-            <section className="flex space-x-2">
-              <div className="wh-5 min-w-5 items-center rounded-md bg-brand-2 text-center text-sm font-semibold text-white">
-                1
-              </div>
-              <p>{post?.post_condition?.[0].text}</p>
-            </section>
-            <section className="flex space-x-2 rounded-2xl">
-              <div className="wh-5 min-w-5 items-center rounded-md bg-brand-2 text-center text-sm font-semibold text-white">
-                2
-              </div>
-              <p>{post?.post_condition?.[1].text}</p>
-            </section>
-            <section className="flex space-x-2 rounded-2xl">
-              <div className="wh-5 min-w-5 items-center rounded-md bg-brand-2 text-center text-sm font-semibold text-white">
-                3
-              </div>
-              <p>{post?.post_condition?.[2].text}</p>
-            </section>
+            {post?.post_condition[0] && (
+              <section className="flex space-x-2">
+                <div className="wh-5 min-w-5 items-center rounded-md bg-brand-2 text-center text-sm font-semibold text-white">
+                  1
+                </div>
+                <p>{post.post_condition[0]?.text}</p>
+              </section>
+            )}
+            {post?.post_condition[1] && (
+              <section className="flex space-x-2 rounded-2xl">
+                <div className="wh-5 min-w-5 items-center rounded-md bg-brand-2 text-center text-sm font-semibold text-white">
+                  2
+                </div>
+                <p>{post?.post_condition[1]?.text}</p>
+              </section>
+            )}
+            {post?.post_condition[2] && (
+              <section className="flex space-x-2 rounded-2xl">
+                <div className="wh-5 min-w-5 items-center rounded-md bg-brand-2 text-center text-sm font-semibold text-white">
+                  3
+                </div>
+                <p>{post?.post_condition[2]?.text}</p>
+              </section>
+            )}
           </div>
         </div>
 
         {/* 신청 과정 */}
-        <div className="mt-16 grid grid-cols-1 gap-4">
-          <div className="flex items-center space-x-2">
-            <h3 className="text-brand-1">신청 과정</h3>
-            <div className="rounded-2xl bg-brand-1 px-2.5 text-white">4</div>
-          </div>
+        {post?.represent_image && (
+          <div className="mt-16 grid grid-cols-1 gap-4">
+            <div className="flex items-center space-x-2">
+              <h3 className="text-brand-1">신청 과정</h3>
+              <div className="rounded-2xl bg-brand-1 px-2.5 text-white">
+                {post?.step}
+              </div>
+            </div>
 
-          {/*여기 문제 있음.. */}
-          <div className="relative h-[400px]">
-            <Image
-              className="rounded-lg object-contain"
-              src={post?.represent_image || ''}
-              alt=""
-              layout="fill"
-            />
+            {/*여기 문제 있음.. */}
+            <div className="relative h-[400px]">
+              <Image
+                className="rounded-lg object-contain"
+                src={post?.represent_image || ''}
+                alt=""
+                layout="fill"
+              />
+            </div>
           </div>
-        </div>
+        )}
         {/* <div className="mt-16 h-full w-full space-y-4">
           <div className="flex items-center space-x-2">
             <h3 className="text-brand-1">신청 과정</h3>
