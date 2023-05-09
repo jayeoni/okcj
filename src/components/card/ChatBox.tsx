@@ -10,7 +10,7 @@ export interface Chat {
   post?: number; //어디에 쓰는 거지?
   created_at: string;
   modified_at: string;
-  title: string;
+  title?: string;
   content: string;
   imgPath?: string;
 }

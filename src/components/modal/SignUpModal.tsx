@@ -72,8 +72,8 @@ export const SignUpModal: FC<SignUpModalProps> = ({ open, onClose }) => {
           <section className="flex flex-col space-y-6">
             <ModalTextField
               type="username"
-              label="이름"
-              placeholder="이름을 입력해주세요"
+              label="아이디"
+              placeholder="아이디를 입력해주세요"
               helper={errors.username?.message}
               {...register('username', { required: '이름을 입력해주세요' })}
             />
@@ -99,7 +99,7 @@ export const SignUpModal: FC<SignUpModalProps> = ({ open, onClose }) => {
             />
 
             <ModalTextField
-              label="성별"
+              label="성별(W/M)"
               helper={errors.gender_category?.message}
               {...register('gender_category', {
                 required: '성별을 입력해주세요(W/M)',

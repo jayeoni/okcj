@@ -5,7 +5,7 @@ export enum HeadType {
 }
 
 export const HEAD_TYPE_KOREAN = {
-  [HeadType.CHAT]: '채팅',
-  [HeadType.FEELING]: '느낌',
+  [HeadType.CHAT]: '정책콘텐츠',
+  [HeadType.FEELING]: '일상',
   [HeadType.IDEA]: '아이디어',
 };

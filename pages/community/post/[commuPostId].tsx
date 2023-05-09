@@ -69,7 +69,7 @@ export const CommuPostPage = () => {
         <TextField
           value={text}
           onChange={(event) => setText(event.target.value)}
-          placeholder="후기를 남겨주세요"
+          placeholder="댓글을 남겨주세요"
           className="rounded-full py-2 px-4 hover:border-2 hover:border-brand-1"
         />
         <Button
