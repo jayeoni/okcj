@@ -1,17 +1,19 @@
 // import { useRouter } from 'next/router';
+import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import Authorization from 'src/components/authorization/Authorization';
 import { Avatar } from 'src/components/avatar/Avatar';
 import { Chat, ChatBox } from 'src/components/card/ChatBox';
 import { Icon } from 'src/components/common/Icon';
 import TextField from 'src/components/input/TextField';
+import { api } from 'src/plugins/axios';
 
 export const ReviewPage = () => {
-  // const router = useRouter();
+  const router = useRouter();
   const [data, setData] = useState<any>();
   const [post, setPost] = useState<any>();
-
-  // const reviewId = router.query.reviewId;
+  const [title, setTitle] = useState<string>();
+  const [text, setText] = useState<string>();
 
   useEffect(() => {
     fetch(`https://jain5379.pythonanywhere.com/postscript/post/`)
@@ -20,6 +22,7 @@ export const ReviewPage = () => {
       .catch((error) => console.error);
   }, []);
 
+  const reviewId = router.query.reviewId;
   useEffect(() => {
     if (data && data.length > 0) {
       const reviewId = data[0].post;
@@ -28,7 +31,21 @@ export const ReviewPage = () => {
         .then((post) => setPost(post))
         .catch((error) => console.error);
     }
-  }, [data]);
+  }, [data, reviewId]);
+
+  const sendPostscriptData = async () => {
+    try {
+      const postscriptData = {
+        title: title,
+        post: reviewId,
+        content: text,
+      };
+      const response = await api.post('/postscript/post/', postscriptData);
+      console.log('Server response: ', response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   if (!data) return <></>;
   return (
@@ -78,11 +95,27 @@ export const ReviewPage = () => {
 
       {/* 입력란 */}
       <div className="fixed bottom-0 flex w-full items-center space-x-4 rounded-t-3xl bg-white p-6 opacity-90 shadow-2xl hover:opacity-100">
-        <TextField
-          placeholder="후기를 남겨주세요"
-          className="rounded-full py-2 px-4 hover:border-2 hover:border-brand-1"
-        />
-        <button className="justify-center rounded-full bg-brand-1 py-2 pl-1.5 pr-2.5 drop-shadow-[0_3px_4px_rgba(0,0,0,0.25)]">
+        <section className="flex-1 flex-col space-y-2">
+          <TextField
+            value={title}
+            onChange={(event) => setTitle(event.target.value)}
+            className="rounded-t-3xl px-4 py-1 hover:border-2 hover:border-brand-1"
+            placeholder="제목을 입력합니다"
+          />
+          <TextField
+            value={text}
+            onChange={(event) => setText(event.target.value)}
+            placeholder="후기를 남겨주세요"
+            className="rounded-b-3xl py-4 px-4 hover:border-2 hover:border-brand-1"
+          />
+        </section>
+        <button
+          onClick={() => {
+            sendPostscriptData();
+            window.location.reload();
+          }}
+          className="justify-center rounded-full bg-brand-1 py-2 pl-1.5 pr-2.5 drop-shadow-[0_3px_4px_rgba(0,0,0,0.25)]"
+        >
           <Icon.Send className="rotate-[42deg] stroke-white stroke-2" />
         </button>
       </div>

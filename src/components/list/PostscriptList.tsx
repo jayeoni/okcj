@@ -16,12 +16,12 @@ interface PostscriptListProps {
   items: Postscript;
 }
 
-export const ContentsCard = (props: PostscriptListProps) => {
+export const PostScriptCard = (props: PostscriptListProps) => {
   const { items } = props;
   const { push } = useRouter();
 
   return (
-    <div onClick={() => push(`/community/post/${items.id}`)}>
+    <div onClick={() => push(`/policy/${items.id}`)}>
       {/* <Image
         className="rounded-lg "
         src={items?.represent_image || ''}
@@ -33,4 +33,4 @@ export const ContentsCard = (props: PostscriptListProps) => {
   );
 };
 
-export default ContentsCard;
+export default PostScriptCard;

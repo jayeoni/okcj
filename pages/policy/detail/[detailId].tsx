@@ -125,7 +125,7 @@ export const PolicyDetailPage = () => {
           <Button
             text="신청하러 바로 가기"
             className="w-full"
-            to={post?.post_url}
+            to={post?.site}
           />
         </div>
       </div>
