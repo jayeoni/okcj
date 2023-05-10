@@ -21,7 +21,7 @@ export const Authorization = () => {
         open={appendixOpen}
         onClose={() => setAppendixOpen(false)}
       />
-      <section className="fixed bottom-24 right-5 z-20 flex-col space-y-1 text-white">
+      <section className="fixed bottom-24 right-5 z-20 flex-col space-y-1 text-sm text-white">
         {moreOpen === true && (
           <>
             {authenticated ? (

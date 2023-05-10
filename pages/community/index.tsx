@@ -15,8 +15,8 @@ export const CommunityPage = () => {
 
   return (
     <div className="px-5">
-      <div className="mb-20 space-y-1 pt-11">
-        <h2 className="text-brand-1">커뮤니티</h2>
+      <div className="space-y-1 pt-11">
+        <h2 className="first-letter: mb-28 text-brand-1">커뮤니티</h2>
         <p className="text-sm text-slate-500">
           오케이, 청정! 커뮤니티는 <br />
           1)“정책 컨텐츠”에 대한 생각, 혹은 <br />
@@ -26,12 +26,12 @@ export const CommunityPage = () => {
         <Image
           src="/assets/characters/cjCharacters.png"
           alt=""
-          className="absolute -right-0 bg-contain bg-center"
-          width={300}
-          height={220}
+          className="absolute top-4 -right-0 bg-contain bg-center"
+          width={220}
+          height={200}
         />
       </div>
-      <div className="mb-20 pt-44">
+      <div className="mb-20 pt-4">
         {commu?.map((title: Commu) => (
           <CommuListCard key={title.id} items={title} />
         ))}

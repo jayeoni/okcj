@@ -16,7 +16,7 @@ export const ListPage = () => {
   //   .then((response) => console.log(response));
 
   useEffect(() => {
-    fetch('https://jain5379.pythonanywhere.com/posts/post/')
+    fetch('https://jain5379.pythonanywhere.com/policys/post/')
       .then((res) => res.json())
       .then((post) => setPost(post))
       .catch((error) => console.error);

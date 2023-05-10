@@ -74,7 +74,7 @@ export const HomePage = () => {
             <h3>곧 마감되는 정책</h3>
             <Label text="HOT" className="bg-brand-1" />
           </div>
-          <div className="grid grid-cols-4 items-center">
+          <div className="grid grid-cols-4 items-center gap-1">
             <section className="hide-scrollbar col-span-3 grid items-center space-y-0.5 overflow-y-scroll p-1">
               {post?.map((list: Post) => (
                 <PostList key={list.id} items={list} />

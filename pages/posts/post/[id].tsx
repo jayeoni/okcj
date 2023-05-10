@@ -31,7 +31,13 @@ export const PostPage = () => {
           </p>
         </div>
       </div>
-      <section className="p-5">{content.content}</section>
+      <img
+        className="p-5"
+        alt=""
+        src={content.images[0].image}
+        layout="fill"
+        objectFit="cover"
+      ></img>
       <section className="bottom-0 w-full space-y-5 bg-white p-5">
         <Button
           text="커뮤니티 바로 가기"

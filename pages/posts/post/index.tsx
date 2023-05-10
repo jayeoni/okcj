@@ -2,7 +2,7 @@ import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
 import Authorization from 'src/components/authorization/Authorization';
 import PostListCard, { Intro } from 'src/components/card/PostListCard';
-import Search from 'src/components/input/Search';
+// import Search from 'src/components/input/Search';
 import { Label } from 'src/components/label/Label';
 
 export const PostListPage = () => {
@@ -31,10 +31,14 @@ export const PostListPage = () => {
         </p>
         <p>
           누구보다 쉽게 <br /> 나에게 필요한 청년 정책만 쏙쏙! <br /> 실제
-          신청자의 생생한 후기까지!
+          신청자의 생생한 후기까지! <br /> <br />
+          <span className="font-bold">
+            정책명 옆에 있는 숫자는 정책 신청 단계의 <br /> 수를 의미해. 작은
+            숫자일수록 신청이 간단하겠지?
+          </span>
         </p>
       </div>
-      <Search placeholder="검색" className="w-full" />
+      {/* <Search placeholder="검색" className="w-full" /> */}
 
       {/* 카드 */}
       <div className="my-10 space-y-5 rounded-2xl p-4 shadow-[0_0_15px_2px_rgba(0,0,0,0.05)]">
