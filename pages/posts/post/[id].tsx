@@ -35,8 +35,8 @@ export const PostPage = () => {
         className="p-5"
         alt=""
         src={content.images[0].image}
-        layout="fill"
-        objectFit="cover"
+        // layout="fill"
+        // objectFit="cover"
       ></img>
       <section className="bottom-0 w-full space-y-5 bg-white p-5">
         <Button

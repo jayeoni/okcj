@@ -60,7 +60,7 @@ export const PolicyDetailPage = () => {
                 className="h-max w-full rounded-lg object-contain"
                 src={post?.represent_image || ''}
                 alt=""
-                layout="fill"
+                // layout="fill"
               />
             </div>
           )}
