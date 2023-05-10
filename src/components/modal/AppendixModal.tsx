@@ -101,15 +101,25 @@ export const AppendixModal: FC<AppendixModalProps> = ({ open, onClose }) => {
           <>
             <div className="mb-2 font-bold">{TAB_DATA[page].boldBody}</div>
             {TAB_DATA[page].body}
-            <div className={`relative mt-2 h-${TAB_DATA[page].imgSize}`}>
-              <Image
-                priority={false}
-                src={`/assets/characters/${TAB_DATA[page].imgPath}`}
-                alt="표"
-                layout="fill"
-                objectFit="contain"
-              />
-            </div>
+            {page < 2 && (
+              <>
+                <div className={`relative mt-2 h-40`}>
+                  <Image
+                    priority={false}
+                    src={`/assets/characters/${TAB_DATA[page].imgPath}`}
+                    alt="표"
+                    layout="fill"
+                    objectFit="contain"
+                  />
+                </div>
+                <a
+                  className="flex flex-col items-end"
+                  href={`${TAB_DATA[page].docUrl}`}
+                >
+                  자세히 보기{' >'}
+                </a>
+              </>
+            )}
             {page === 2 &&
               DOC_DOWNLOAD.map((doc) => (
                 <DocLinkList key={doc.id} items={doc} />

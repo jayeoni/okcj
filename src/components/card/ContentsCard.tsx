@@ -21,7 +21,7 @@ export const ContentsCard = (props: ContentsCardProps) => {
   const { push } = useRouter();
 
   return (
-    <div className="wh-28" onClick={() => push(`/policys/post/${items.id}`)}>
+    <div className="wh-28" onClick={() => push(`/posts/post/${items.id}`)}>
       <Image
         className="rounded-lg "
         src={items?.represent_image || ''}

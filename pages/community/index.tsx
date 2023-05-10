@@ -16,7 +16,7 @@ export const CommunityPage = () => {
   return (
     <div className="px-5">
       <div className="space-y-1 pt-11">
-        <h2 className="first-letter: mb-28 text-brand-1">커뮤니티</h2>
+        <h2 className="mb-28 text-brand-1">커뮤니티</h2>
         <p className="text-sm text-slate-500">
           오케이, 청정! 커뮤니티는 <br />
           1)“정책 컨텐츠”에 대한 생각, 혹은 <br />

@@ -1,9 +1,10 @@
-import Image from 'next/image';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import { Button } from 'src/components/button/Button';
-import DocumentCard from 'src/components/card/DocumentCard';
-import { DOCUMENT_DUMMY } from 'src/dummies';
+import DocumentCard, { Doc } from 'src/components/card/DocumentCard';
+import PostConditionCard, {
+  Condition,
+} from 'src/components/card/PostConditionCard';
 
 export const PolicyDetailPage = () => {
   const router = useRouter();
@@ -30,57 +31,40 @@ export const PolicyDetailPage = () => {
         <div className="mx-5 mt-9 space-y-4">
           <div className="flex items-center space-x-2">
             <h3 className="text-brand-1">신청 요건</h3>
-            <div className="rounded-2xl bg-brand-1 px-2.5 text-white">3</div>
+            <div className="rounded-2xl bg-brand-1 px-2.5 text-white">
+              {post?.post_condition.length}
+            </div>
           </div>
-          <div className="flex-col space-y-2 rounded-2xl p-4 shadow-[0_3px_15px_3px_rgba(0,0,0,0.05)]">
-            {post?.post_condition[0] && (
-              <section className="flex space-x-2">
-                <div className="wh-5 min-w-5 items-center rounded-md bg-brand-2 text-center text-sm font-semibold text-white">
-                  1
-                </div>
-                <p>{post.post_condition[0]?.text}</p>
-              </section>
-            )}
-            {post?.post_condition[1] && (
-              <section className="flex space-x-2 rounded-2xl">
-                <div className="wh-5 min-w-5 items-center rounded-md bg-brand-2 text-center text-sm font-semibold text-white">
-                  2
-                </div>
-                <p>{post?.post_condition[1]?.text}</p>
-              </section>
-            )}
-            {post?.post_condition[2] && (
-              <section className="flex space-x-2 rounded-2xl">
-                <div className="wh-5 min-w-5 items-center rounded-md bg-brand-2 text-center text-sm font-semibold text-white">
-                  3
-                </div>
-                <p>{post?.post_condition[2]?.text}</p>
-              </section>
+
+          <div className="flex-col justify-center space-y-2 rounded-2xl p-4 shadow-[0_3px_15px_3px_rgba(0,0,0,0.05)]">
+            {post?.post_condition?.length ? (
+              <>
+                {post.post_condition.map((con: Condition, index: number) => (
+                  <section key={con.id} className="flex space-x-2">
+                    <div className="wh-5 min-w-5 items-center rounded-md bg-brand-2 text-center text-sm font-semibold text-white">
+                      {index + 1}
+                    </div>
+                    <PostConditionCard items={con} />
+                  </section>
+                ))}
+              </>
+            ) : (
+              <p>필요한 신청 요건이 없습니다.</p>
             )}
           </div>
-        </div>
 
-        {/* 신청 과정 */}
-        {post?.represent_image && (
-          <div className="mt-16 grid grid-cols-1 gap-4">
-            {/* <div className="flex items-center space-x-2">
-              <h3 className="text-brand-1">신청 과정</h3>
-              <div className="rounded-2xl bg-brand-1 px-2.5 text-white">
-                {post?.step}
-              </div>
-            </div> */}
-
-            <div className="relative h-[400px]">
-              <Image
+          {/* 신청 과정 */}
+          {post?.represent_image && (
+            <div className="relative py-8">
+              <img
                 className="h-max w-full rounded-lg object-contain"
                 src={post?.represent_image || ''}
                 alt=""
                 layout="fill"
               />
             </div>
-          </div>
-        )}
-        {/* <div className="mt-16 h-full w-full space-y-4">
+          )}
+          {/* <div className="mt-16 h-full w-full space-y-4">
           <div className="flex items-center space-x-2">
             <h3 className="text-brand-1">신청 과정</h3>
             <div className="rounded-2xl bg-brand-1 px-2.5 text-white">4</div>
@@ -95,28 +79,37 @@ export const PolicyDetailPage = () => {
           />
         </div> */}
 
-        {/* 구비 서류 */}
-        <div className="mx-5 space-y-4 pb-12">
-          <div className="flex items-center space-x-2">
-            <h3 className="text-brand-1">구비 서류</h3>
-            <div className="rounded-2xl bg-brand-1 px-2.5 text-white">3</div>
+          {/* 구비 서류 */}
+          <div className="space-y-4 pb-12">
+            <div className="flex items-center space-x-2">
+              <h3 className="text-brand-1">구비 서류</h3>
+              <div className="rounded-2xl bg-brand-1 px-2.5 text-white">
+                {post?.post_url.length}
+              </div>
+            </div>
+            <div className="flex-col justify-center space-y-2 rounded-2xl p-4 shadow-[0_3px_15px_3px_rgba(0,0,0,0.05)]">
+              {post?.post_url?.length ? (
+                <>
+                  {post.post_url.map((doc: Doc) => (
+                    <DocumentCard key={doc.id} items={doc} />
+                  ))}
+                  <p className="text-sm text-slate-500">
+                    서류 이름을 누르면 해당 서류 발급 사이트로 연결돼!
+                  </p>
+                </>
+              ) : (
+                <p>필요한 구비 서류가 없습니다.</p>
+              )}
+            </div>
           </div>
-          <div className="flex-col justify-center space-y-2 rounded-2xl p-4 shadow-[0_3px_15px_3px_rgba(0,0,0,0.05)]">
-            {DOCUMENT_DUMMY.map((doc) => (
-              <DocumentCard key={doc.id} items={doc} />
-            ))}
-            <p className="text-sm text-slate-500">
-              서류 이름을 누르면 해당 서류 발급 사이트로 연결돼!
-            </p>
-          </div>
-        </div>
 
-        <div className="fixed bottom-8 z-10 ml-5 w-full pr-10">
-          <Button
-            text="신청하러 바로 가기"
-            className="w-full"
-            to={post?.site}
-          />
+          <div className="fixed bottom-8 z-10 w-full pr-10">
+            <Button
+              text="신청하러 바로 가기"
+              className="w-full"
+              to={post?.site}
+            />
+          </div>
         </div>
       </div>
     </div>

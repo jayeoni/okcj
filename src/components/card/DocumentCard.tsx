@@ -1,14 +1,15 @@
 import { useRouter } from 'next/router';
 import React from 'react';
 import { Icon } from 'src/components/common/Icon';
-interface Items {
+export interface Doc {
   id: number;
-  title: string;
-  url?: string; //서류 발급 사이트
+  text: string;
+  url: string; //서류 발급 사이트
+  post: number;
 }
 
 interface DocumentCardProps {
-  items: Items;
+  items: Doc;
 }
 
 export const DocumentCard = (props: DocumentCardProps) => {
@@ -18,10 +19,10 @@ export const DocumentCard = (props: DocumentCardProps) => {
   return (
     <div
       className="flex w-max items-center justify-center rounded-lg bg-brand-1 py-0.5 px-2 text-white"
-      onClick={() => push(`{items.url}`)}
+      onClick={() => push(items.url)}
     >
       <Icon.Paste className="mr-1.5" />
-      {items.title}
+      {items.text}
     </div>
   );
 };
