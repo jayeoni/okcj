@@ -7,7 +7,6 @@ import TextField from 'src/components/input/TextField';
 import { HEAD_TYPE_KOREAN, HeadType } from 'src/constants/head';
 import { api } from 'src/plugins/axios';
 import { MomentFormat, utcToLocalFormat } from 'src/plugins/moment';
-import { tokenState } from 'src/plugins/ridge';
 
 interface DataType {
   id: number;
@@ -44,7 +43,6 @@ export const CommuPostPage = () => {
       };
       const response = await api.post('/community/comment/', commentData);
       console.log('Server response: ', response.data);
-      tokenState.set(response.data.token.access_token);
     } catch (error) {
       console.error(error);
     }
@@ -73,9 +71,15 @@ export const CommuPostPage = () => {
         </div>
       </div>
       <section className="fixed bottom-0 h-80 w-full space-y-5 overflow-scroll rounded-t-3xl bg-gray-50 px-5 pt-6 pb-28 shadow-[5px_5px_20px_10px_rgba(0,0,0,0.05)] ">
-        {data.comment?.map((chat: Chat) => (
-          <ChatBox key={chat.id} items={chat} />
-        ))}
+        {data?.comment?.length ? (
+          data.comment.map((chat: Chat) => (
+            <ChatBox key={chat.id} items={chat} />
+          ))
+        ) : (
+          <p className="flex justify-center text-center">
+            첫 댓글의 주인공이 되어보세요😃
+          </p>
+        )}
       </section>
 
       {/* 입력란 */}
