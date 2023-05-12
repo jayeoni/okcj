@@ -4,12 +4,25 @@ import { Button } from 'src/components/button/Button';
 import ChatBox, { Chat } from 'src/components/card/ChatBox';
 import { Icon } from 'src/components/common/Icon';
 import TextField from 'src/components/input/TextField';
+import { HEAD_TYPE_KOREAN, HeadType } from 'src/constants/head';
 import { api } from 'src/plugins/axios';
 import { MomentFormat, utcToLocalFormat } from 'src/plugins/moment';
+import { tokenState } from 'src/plugins/ridge';
+
+interface DataType {
+  id: number;
+  user: string;
+  created_at: string;
+  modified_at: string;
+  title: string;
+  content: string;
+  comment: any; //나중에 array comment type 달아주기
+  community_category: HeadType;
+}
 
 export const CommuPostPage = () => {
   const router = useRouter();
-  const [data, setData] = useState<any>();
+  const [data, setData] = useState<DataType>();
   const [text, setText] = useState<string>();
 
   const commuPostId = router.query.commuPostId;
@@ -31,6 +44,7 @@ export const CommuPostPage = () => {
       };
       const response = await api.post('/community/comment/', commentData);
       console.log('Server response: ', response.data);
+      tokenState.set(response.data.token.access_token);
     } catch (error) {
       console.error(error);
     }
@@ -44,7 +58,7 @@ export const CommuPostPage = () => {
       <div className="px-5">
         <div className="mb-12 space-y-1 pt-11">
           <h2 className="text-brand-1">
-            [{data.community_category}] {data.title}
+            [{HEAD_TYPE_KOREAN[data.community_category]}] {data.title}
           </h2>
           <p className="text-sm text-slate-500">
             {data.user} |{' '}
