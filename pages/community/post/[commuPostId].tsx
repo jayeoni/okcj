@@ -1,3 +1,4 @@
+import moment from 'moment';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import { Button } from 'src/components/button/Button';
@@ -6,7 +7,6 @@ import { Icon } from 'src/components/common/Icon';
 import TextField from 'src/components/input/TextField';
 import { HEAD_TYPE_KOREAN, HeadType } from 'src/constants/head';
 import { api } from 'src/plugins/axios';
-import { MomentFormat, utcToLocalFormat } from 'src/plugins/moment';
 
 interface DataType {
   id: number;
@@ -48,6 +48,9 @@ export const CommuPostPage = () => {
     }
   };
 
+  const momentObject = moment(data?.created_at);
+  const formattedDate = momentObject.format('YYYY.MM.DD HH:mm');
+
   console.log(text);
 
   if (!data) return <></>;
@@ -59,11 +62,7 @@ export const CommuPostPage = () => {
             [{HEAD_TYPE_KOREAN[data.community_category]}] {data.title}
           </h2>
           <p className="text-sm text-slate-500">
-            {data.user} |{' '}
-            {utcToLocalFormat(
-              new Date(data.created_at).toLocaleString(),
-              MomentFormat.YYYYMMDDHmm
-            )}
+            {data.user} | {formattedDate}
           </p>
         </div>
         <div className="h-96 rounded-2xl p-5 text-sm shadow-[1px_0_35px_1px_rgba(0,0,0,0.05)]">

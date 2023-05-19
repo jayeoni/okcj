@@ -10,22 +10,17 @@ export const PolicyDetailPage = () => {
   const router = useRouter();
   const [post, setPost] = useState<any>();
 
-  const detailId = router.query.detailId;
+  const policyId = router.query.policyId;
   useEffect(() => {
-    if (detailId)
-      fetch(`https://jain5379.pythonanywhere.com/posts/post/${detailId}`)
+    if (policyId)
+      fetch(`https://jain5379.pythonanywhere.com/posts/post/${policyId}`)
         .then((res) => res.json())
         .then((post) => setPost(post))
         .catch((error) => console.error);
-  }, [detailId]);
+  }, [policyId]);
 
   return (
     <div className="mb-20">
-      <div className="mx-5 space-y-1 py-11 pr-9">
-        <h2 className="pr-11 text-brand-1">{post?.title}</h2>
-        <p className="pr-16 text-sm text-slate-900">{post?.intro}</p>
-      </div>
-
       <div className="space-y-14">
         {/* 신청 요건 */}
         <div className="mx-5 mt-9 space-y-4">
@@ -103,7 +98,7 @@ export const PolicyDetailPage = () => {
             </div>
           </div>
 
-          <div className="fixed bottom-8 z-10 w-full pr-10">
+          <div className="bottom-4 z-10 w-full">
             <Button
               text="신청하러 바로 가기"
               className="w-full"

@@ -15,6 +15,9 @@ export const ReviewPage = () => {
   const [title, setTitle] = useState<string>();
   const [text, setText] = useState<string>();
 
+  const policyId = router.query.policyId;
+  const policyIdNum = parseInt(policyId);
+
   useEffect(() => {
     fetch(`https://jain5379.pythonanywhere.com/postscript/post/`)
       .then((res) => res.json())
@@ -22,22 +25,18 @@ export const ReviewPage = () => {
       .catch((error) => console.error);
   }, []);
 
-  const reviewId = router.query.reviewId;
   useEffect(() => {
-    if (data && data.length > 0) {
-      const reviewId = data[0].post;
-      fetch(`https://jain5379.pythonanywhere.com/posts/post/${reviewId}/`)
-        .then((res) => res.json())
-        .then((post) => setPost(post))
-        .catch((error) => console.error);
-    }
-  }, [data, reviewId]);
+    fetch(`https://jain5379.pythonanywhere.com/posts/post/${policyId}/`)
+      .then((res) => res.json())
+      .then((post) => setPost(post))
+      .catch((error) => console.error);
+  }, [policyId]);
 
   const sendPostscriptData = async () => {
     try {
       const postscriptData = {
         title: title,
-        post: reviewId,
+        post: policyId,
         content: text,
       };
       const response = await api.post('/postscript/post/', postscriptData);
@@ -50,11 +49,6 @@ export const ReviewPage = () => {
   if (!data) return <></>;
   return (
     <div className="h-screen bg-brand-1">
-      <div className="space-y-1 py-11 pl-4 pr-10 text-white">
-        <h2>{post?.title}</h2>
-        <p className="text-sm">{post?.intro}</p>
-      </div>
-
       <div className="flex h-full flex-col rounded-t-[50px] bg-gray-100 px-7 py-2.5">
         <div className="mx-24 bg-brand-1 p-0.5" />
         <p className="mt-7 text-sm text-gray-500">
@@ -86,9 +80,13 @@ export const ReviewPage = () => {
                 className="wh-12 scale-125 transform"
               />
             </div>
-            {data?.map((chat: Chat) => (
-              <ChatBox key={chat.id} items={chat} />
-            ))}
+            {/* {data.post === policyId &&
+              data.map((chat: Chat) => <ChatBox key={chat.id} items={chat} />)} */}
+            {data
+              .filter((item: Chat) => item.post === policyIdNum)
+              .map((chat: Chat) => (
+                <ChatBox key={chat.id} items={chat} />
+              ))}
           </section>
         </div>
       </div>

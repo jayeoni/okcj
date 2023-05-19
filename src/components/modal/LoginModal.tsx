@@ -1,4 +1,5 @@
 import axios from 'axios';
+import router from 'next/router';
 import React, { FC } from 'react';
 import { useForm } from 'react-hook-form';
 import { useAuth } from 'src/hooks';
@@ -73,7 +74,11 @@ export const LoginModal: FC<LoginModalProps> = ({ open, onClose }) => {
             />
           </section>
 
-          <Button text="로그인하기" className="filled-brand-1" />
+          <Button
+            text="로그인하기"
+            className="filled-brand-1"
+            onClick={() => router.push(`/home`)}
+          />
         </form>
       </div>
     </AnimationLayout>

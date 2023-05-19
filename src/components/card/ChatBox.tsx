@@ -1,5 +1,5 @@
+import moment from 'moment';
 import React from 'react';
-import { MomentFormat, utcToLocalFormat } from 'src/plugins/moment';
 import { twMerge } from 'tailwind-merge';
 
 import { Avatar } from '../avatar/Avatar';
@@ -7,7 +7,7 @@ import { Avatar } from '../avatar/Avatar';
 export interface Chat {
   id: number;
   user: string;
-  post?: number; //어디에 쓰는 거지?
+  post: number;
   created_at: string;
   modified_at: string;
   title?: string;
@@ -21,6 +21,9 @@ interface ChatBoxProps {
 
 export const ChatBox = (props: ChatBoxProps) => {
   const { items } = props;
+  const momentObject = moment(items?.created_at);
+  const formattedDate = momentObject.format('YYYY.MM.DD HH:mm');
+
   return (
     <div
       className={twMerge(
@@ -43,10 +46,11 @@ export const ChatBox = (props: ChatBoxProps) => {
         <section className="flex items-center space-x-1 text-brand-1">
           <h4 className="text-lg font-bold">{items.user}</h4>
           <p className="text-xs">
-            {utcToLocalFormat(
+            {formattedDate}
+            {/* {utcToLocalFormat(
               new Date(items.created_at).toLocaleString(),
               MomentFormat.YYYYMMDDHmm
-            )}
+            )} */}
           </p>
         </section>
         {items.content}
