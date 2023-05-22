@@ -49,9 +49,8 @@ export const ReviewPage = () => {
   if (!data) return <></>;
   return (
     <div className="h-screen">
-      <div className="flex h-full flex-col bg-gray-100 px-7 py-2.5">
-        <div className="mx-24 bg-brand-1 p-0.5" />
-        <p className="mt-7 text-sm text-gray-500">
+      <div className="flex h-full flex-col px-5 py-2">
+        <p className="mt-3 text-sm text-gray-500">
           지금 바로 내가 경험한 정책에 대한 후기를 작성하고 이 정책을 신청할
           누군가에게는 유용한 “정보”가 된다는 뿌듯함을 느껴봐요!
         </p>

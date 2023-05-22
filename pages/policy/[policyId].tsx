@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import router from 'next/router';
 import React, { useEffect, useState } from 'react';
-import { Tab } from 'src/components/tab/Tab';
+import { PolicyTab } from 'src/components/tab/PolicyTab';
 
 import PolicyDetailPage from './detail';
 import ReviewPage from './review';
@@ -78,16 +78,17 @@ export const PolicyPage = () => {
         <h2>{post?.title}</h2>
         <p className="text-sm">{post?.intro}</p>
       </div>
-      <Tab className="mt-4 justify-center space-x-8 border-b border-gray-200">
+      <PolicyTab className="flex w-full justify-evenly bg-brand-1">
         {TAB_DATA.map((t, i) => (
-          <Tab.Item
+          <PolicyTab.Item
             key={i}
             text={t.text}
             selected={page === i}
             onClick={() => setPage([i, i - page])}
+            className="w-full rounded-t-2xl border-t bg-white"
           />
         ))}
-      </Tab>
+      </PolicyTab>
 
       <div className="flex-1">
         <motion.section
