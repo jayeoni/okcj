@@ -23,11 +23,7 @@ export const PostListCard = (props: PostListCardProps) => {
   const { items } = props;
   return (
     <div className="flex items-center justify-between border-t py-7 text-sm">
-      <Link
-        href={`/policy/detail/${items.id}`}
-        // href={items?.post_url ? items.post_url[0]?.url || '' : ''}
-        className="basis-3/5"
-      >
+      <Link href={`/policy/${items.id}`} className="basis-3/5">
         {items.title}
       </Link>
 

@@ -41,7 +41,10 @@ export const HomePage = () => {
       .catch((error) => console.error);
   }, []);
 
-  //console.log('isAuthorized: ', isAuthorized);
+  // console.log(
+  //   'policy: ',
+  //   post.filter((item: Post) => item.progress === true)
+  // );
 
   return (
     <div className="relative overflow-hidden px-5 pt-5 pb-24">
@@ -76,15 +79,17 @@ export const HomePage = () => {
           </div>
           <div className="grid grid-cols-4 items-center gap-1">
             <section className="hide-scrollbar col-span-3 grid items-center space-y-0.5 overflow-y-scroll p-1">
-              {post?.map((list: Post) => (
-                <PostList key={list.id} items={list} />
-              ))}
+              {post
+                .filter((item: Post) => item.progress !== true)
+                .map((list: Post) => (
+                  <PostList key={list.id} items={list} />
+                ))}
               {post?.filter((list: Post) => {
                 const today = new Date();
                 const dday = new Date(list.dday);
                 const diffTime = Math.abs(dday.getTime() - today.getTime());
                 const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-                return diffDays < 7;
+                return diffDays < 5;
               }).length === 0 && <p>곧 마감되는 정책이 없습니다.</p>}
             </section>
             <Button
@@ -109,7 +114,7 @@ export const HomePage = () => {
               <p className="text-sm text-gray-400">작성된 소식이 없습니다.</p>
             ) : (
               <Swiper
-                className="mySwiper max-w-md"
+                className="mySwiper flex max-w-md flex-row-reverse"
                 slidesPerView="auto"
                 modules={[FreeMode]}
                 spaceBetween={10}
@@ -117,7 +122,7 @@ export const HomePage = () => {
                 slidesOffsetAfter={0}
                 freeMode={true}
               >
-                {policy?.map((policy: Policy) => (
+                {policy?.reverse().map((policy: Policy) => (
                   <SwiperSlide key={policy.id} className="w-auto">
                     <ContentsCard key={policy.id} items={policy} />
                   </SwiperSlide>

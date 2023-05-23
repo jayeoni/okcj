@@ -6,6 +6,7 @@ import { Label } from '../label/Label';
 export interface Post {
   id: number;
   title: string;
+  progress: boolean;
   post_url: {
     url: string;
   }[];

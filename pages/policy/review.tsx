@@ -68,9 +68,9 @@ export const ReviewPage = () => {
                 </p>
 
                 <p className="text-xs text-brand-1">
-                  소득 어쩌구 예시를 달아줍니다 이렇게 이렇게 예시를 달아줍니다.
-                  어쩌구저쩌구 어쩌구저쩌구 이렇게 길게 다실 예정인가요? 이렇게
-                  길게 써봅니다.
+                  ex. 후불 카드 교통비 지원 신청 받았는데, 몽땅정보통에서 자가
+                  확인하고 신청하면 돼서 쉽고 빨리 끝남. 학교 다니면서 은근
+                  교통비 부담됐는데 이렇게라도 받아서 진짜 꿀인듯!!
                 </p>
               </div>
 
@@ -109,7 +109,7 @@ export const ReviewPage = () => {
         <button
           onClick={() => {
             sendPostscriptData();
-            window.location.reload();
+            // window.location.reload();
           }}
           className="justify-center rounded-full bg-brand-1 py-2 pl-1.5 pr-2.5 drop-shadow-[0_3px_4px_rgba(0,0,0,0.25)]"
         >

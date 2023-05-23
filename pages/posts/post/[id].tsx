@@ -1,8 +1,8 @@
+import moment from 'moment';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import Authorization from 'src/components/authorization/Authorization';
 import { Button } from 'src/components/button/Button';
-import { MomentFormat, utcToLocalFormat } from 'src/plugins/moment';
 
 export const PostPage = () => {
   const [content, setContent] = useState<any>();
@@ -17,18 +17,16 @@ export const PostPage = () => {
         .catch((error) => console.error);
   }, [id]);
 
+  const momentObject = moment(content?.created_at);
+  const formattedDate = momentObject.format('YYYY.MM.DD');
+
   if (!content) return <></>;
   return (
     <div className="h-full bg-gray-200">
       <div className="rounded-b-2xl bg-gradient-to-r from-emerald-300 to-cyan-300 pb-2.5 pt-24 drop-shadow">
         <div className="space-y-1 pl-4 pr-14 text-white">
           <h3 className="text-2xl">{content.title}</h3>
-          <p className="text-sm">
-            {utcToLocalFormat(
-              new Date(content.created_at).toLocaleString(),
-              MomentFormat.YYYYMMDD
-            )}
-          </p>
+          <p className="text-sm">{formattedDate}</p>
         </div>
       </div>
       <img
@@ -50,13 +48,6 @@ export const PostPage = () => {
           to="/posts"
         />
       </section>
-      {/* <button
-        className="wh-12 fixed bottom-24 right-5 z-20 flex items-center justify-center rounded-full bg-[#6EE7B7] bg-opacity-90"
-        onClick={() => window.scrollTo(0, 0)}
-      >
-        <div className="blur-sm" />
-        <Icon.ChevronUp className="wh-8 stroke-white stroke-2" />
-      </button> */}
       <Authorization />
     </div>
   );
