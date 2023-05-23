@@ -80,7 +80,7 @@ export const HomePage = () => {
           <div className="grid grid-cols-4 items-center gap-1">
             <section className="hide-scrollbar col-span-3 grid items-center space-y-0.5 overflow-y-scroll p-1">
               {post
-                .filter((item: Post) => item.progress !== true)
+                ?.filter((item: Post) => item.progress !== true)
                 .map((list: Post) => (
                   <PostList key={list.id} items={list} />
                 ))}
