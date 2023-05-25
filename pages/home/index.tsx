@@ -81,15 +81,16 @@ export const HomePage = () => {
             <section className="hide-scrollbar col-span-3 grid items-center space-y-0.5 overflow-y-scroll p-1">
               {post
                 ?.filter((item: Post) => item.progress !== true)
+                .reverse()
                 .map((list: Post) => (
                   <PostList key={list.id} items={list} />
                 ))}
               {post?.filter((list: Post) => {
                 const today = new Date();
                 const dday = new Date(list.dday);
-                const diffTime = Math.abs(dday.getTime() - today.getTime());
+                const diffTime = dday.getTime() - today.getTime();
                 const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-                return diffDays < 5;
+                return diffDays > 0 && diffDays < 5;
               }).length === 0 && <p>곧 마감되는 정책이 없습니다.</p>}
             </section>
             <Button
@@ -122,11 +123,14 @@ export const HomePage = () => {
                 slidesOffsetAfter={0}
                 freeMode={true}
               >
-                {policy?.reverse().map((policy: Policy) => (
-                  <SwiperSlide key={policy.id} className="w-auto">
-                    <ContentsCard key={policy.id} items={policy} />
-                  </SwiperSlide>
-                ))}
+                {policy
+                  ?.slice()
+                  .reverse()
+                  .map((policy: Policy) => (
+                    <SwiperSlide key={policy.id} className="w-auto">
+                      <ContentsCard key={policy.id} items={policy} />
+                    </SwiperSlide>
+                  ))}
               </Swiper>
             )}
           </div>
@@ -145,25 +149,14 @@ export const HomePage = () => {
             {!postscript ? (
               <p className="text-sm text-gray-400">작성된 후기가 없습니다.</p>
             ) : (
-              // <Swiper
-              //   className="mySwiper max-w-md"
-              //   slidesPerView="auto"
-              //   modules={[FreeMode]}
-              //   spaceBetween={10}
-              //   slidesOffsetBefore={0}
-              //   slidesOffsetAfter={0}
-              //   freeMode={true}
-              // >
-              //   {postscript?.map((content: Postscript) => (
-              //     <SwiperSlide key={content.id} className="w-auto">
-              //       <PostscriptCard items={content} />
-              //     </SwiperSlide>
-              //   ))}
-              // </Swiper>
               <section className="hide-scrollbar col-span-3 grid items-center overflow-y-scroll p-1">
-                {postscript.map((list: Postscript) => (
-                  <PostscriptCard key={list.id} items={list} />
-                ))}
+                {postscript
+                  .slice()
+                  .reverse()
+                  .slice(0, 5)
+                  .map((list: Postscript) => (
+                    <PostscriptCard key={list.id} items={list} />
+                  ))}
               </section>
             )}
           </div>
