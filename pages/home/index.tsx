@@ -88,9 +88,9 @@ export const HomePage = () => {
               {post?.filter((list: Post) => {
                 const today = new Date();
                 const dday = new Date(list.dday);
-                const diffTime = dday.getTime() - today.getTime();
+                const diffTime = Math.abs(dday.getTime() - today.getTime());
                 const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-                return diffDays > 0 && diffDays < 5;
+                return diffDays < 5;
               }).length === 0 && <p>곧 마감되는 정책이 없습니다.</p>}
             </section>
             <Button

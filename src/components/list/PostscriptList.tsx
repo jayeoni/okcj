@@ -21,7 +21,7 @@ export const PostScriptCard = (props: PostscriptListProps) => {
   const { push } = useRouter();
 
   return (
-    <div onClick={() => push(`/policy/${items.post}`)}>
+    <div onClick={() => push(`/policy/${items.id}`)}>
       {/* <Image
         className="rounded-lg "
         src={items?.represent_image || ''}
