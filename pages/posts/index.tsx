@@ -25,18 +25,21 @@ export const ListPage = () => {
   return (
     <div className="p-5">
       <h2 className="mt-5 text-brand-1">정책 콘텐츠</h2>
-      <p className="mt-2.5 mb-20 ">
+      <p className="mt-2.5 mb-10">
         ‘행정’, ‘정책’이라고 하면 막연히 거리감부터 느껴졌다고? 1주일에 한 번씩
         업데이트되는 “오케이, 청정!”의 정책 콘텐츠로 나를 위한 정책 정보, 내
         것으로 만들어보자!
       </p>
 
       <div className="grid grid-cols-2 gap-5">
-        {post?.map((content: Content) => (
-          <SwiperSlide key={content.id} className="">
-            <ContentsPageCard items={content} />
-          </SwiperSlide>
-        ))}
+        {post
+          ?.slice()
+          .reverse()
+          .map((content: Content) => (
+            <SwiperSlide key={content.id} className="">
+              <ContentsPageCard items={content} />
+            </SwiperSlide>
+          ))}
       </div>
     </div>
   );

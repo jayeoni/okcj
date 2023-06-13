@@ -30,7 +30,17 @@ export const useAuth = () => {
       .post('/accounts/login', data)
       .then(({ data: { token } }) => setToken(token));
   const logout = () => tokenState.reset();
-  return { token, authenticated, user, setUser, signup, login, logout };
+  return {
+    token,
+    authenticated,
+    user,
+    userName: user?.username,
+    nickName: user?.nickname,
+    setUser,
+    signup,
+    login,
+    logout,
+  };
 };
 
 export function useQueryString(queryObject: any = {}) {

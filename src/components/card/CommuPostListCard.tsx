@@ -8,22 +8,19 @@ export interface Commu {
   title: string;
 }
 
-interface CommuListProps {
+interface CommuPostListProps {
   items: Commu;
 }
 
-export const CommuList = (props: CommuListProps) => {
+export const CommuListCard = (props: CommuPostListProps) => {
   const { items } = props;
   return (
-    <Link
-      className="flex space-x-1 border-t py-6"
-      href={`/community/post/${items.id}`}
-    >
-      <p className="text-sm text-slate-500">
+    <Link href={`/community/post/${items.id}`}>
+      <p>
         [{HEAD_TYPE_KOREAN[items.community_category]}] {items.title}
       </p>
     </Link>
   );
 };
 
-export default CommuList;
+export default CommuListCard;

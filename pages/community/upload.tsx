@@ -7,7 +7,7 @@ import TextArea from 'src/components/input/TextArea';
 import TextField from 'src/components/input/TextField';
 import SelectHeadType from 'src/components/select/SelectHead';
 import { HeadType } from 'src/constants/head';
-// import { useAuth } from 'src/hooks';
+import { useAuth } from 'src/hooks';
 import { api } from 'src/plugins/axios';
 
 export const CommuUploadPage = () => {
@@ -15,7 +15,7 @@ export const CommuUploadPage = () => {
   const [content, setContent] = useState<string>();
   const [selectValue, setSelectValue] = useState<HeadType | null>();
 
-  // const { user } = useAuth();
+  const { nickName } = useAuth();
   // console.log('user: ', user);
 
   const sendPostData = async () => {
@@ -58,7 +58,7 @@ export const CommuUploadPage = () => {
 
       <div className="mt-2.5 mb-10 flex items-center space-x-1.5 text-slate-500">
         <Avatar className="wh-7" />
-        {/* <p className="text-sm">{user?.nickname}</p> */}
+        <p className="text-sm">{nickName}</p>
       </div>
 
       <TextArea
